@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Sagebrush on Fisher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sbf-page *{margin:0;padding:0;box-sizing:border-box}
+  .sbf-page{
+    font-family:'Inter',sans-serif;
+    background:#fbf8f3;
+    color:#000f32;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+  .sbf-page a{color:inherit}
+
+  .sbf-display{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.02em;line-height:0.95}
+
+  /* NAV */
+  .sbf-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,248,243,0.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,15,50,0.14);
+    padding:18px 6vw;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:30px;
+  }
+  .sbf-nav-left{display:flex;justify-content:flex-start;align-items:center}
+  .sbf-nav-center{display:flex;justify-content:center;align-items:center;gap:40px}
+  .sbf-nav-right{display:flex;justify-content:flex-end;align-items:center;gap:16px}
+  .sbf-logo{
+    font-family:'Fraunces',serif;
+    font-size:22px;font-weight:500;
+    letter-spacing:-0.01em;
+    color:#000f32;
+    text-decoration:none;
+  }
+  .sbf-logo span{color:#e03616;font-style:italic}
+  .sbf-menu-link{
+    font-size:13px;font-weight:500;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:#000f32;text-decoration:none;
+    position:relative;padding:6px 0;
+    transition:color 0.3s ease;
+  }
+  .sbf-menu-link::after{
+    content:'';position:absolute;left:0;bottom:0;
+    width:0;height:1px;background:#e03616;
+    transition:width 0.3s ease;
+  }
+  .sbf-menu-link:hover{color:#e03616}
+  .sbf-menu-link:hover::after{width:100%}
+  a.sbf-nav-cta{
+    background:#000f32;color:#fbf8f3;
+    padding:11px 22px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.02em;
+    transition:all 0.3s ease;
+    border:1px solid #000f32;
+    display:inline-block;
+    white-space:nowrap;
+  }
+  .sbf-nav-cta:hover{background:#e03616;border-color:#e03616;transform:translateY(-1px)}
+
+  .sbf-menu-toggle{
+    display:none;background:none;border:none;cursor:pointer;
+    padding:8px;width:40px;height:40px;
+    flex-direction:column;justify-content:center;gap:5px;
+  }
+  .sbf-menu-toggle span{display:block;width:22px;height:2px;background:#000f32;transition:all 0.3s ease}
+  .sbf-menu-toggle.sbf-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .sbf-menu-toggle.sbf-open span:nth-child(2){opacity:0}
+  .sbf-menu-toggle.sbf-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* MAIN */
+  .sbf-main{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:80px 6vw;
+    position:relative;
+    overflow:hidden;
+  }
+  .sbf-main::before{
+    content:'';position:absolute;
+    top:-200px;right:-200px;
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,#e03616 0%,transparent 70%);
+    opacity:0.08;pointer-events:none;
+  }
+  .sbf-main::after{
+    content:'';position:absolute;
+    bottom:-200px;left:-200px;
+    width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle,#000f32 0%,transparent 70%);
+    opacity:0.06;pointer-events:none;
+  }
+
+  .sbf-content{
+    max-width:780px;
+    text-align:center;
+    position:relative;
+    z-index:1;
+  }
+
+  /* CHECKMARK */
+  .sbf-check-wrap{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:88px;height:88px;
+    border-radius:50%;
+    background:#000f32;
+    margin-bottom:36px;
+    position:relative;
+    animation:sbfPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+  }
+  .sbf-check-wrap::before{
+    content:'';
+    position:absolute;
+    inset:-8px;
+    border-radius:50%;
+    border:1px solid rgba(224,54,22,0.4);
+    animation:sbfRing 1.5s ease-out 0.7s infinite;
+  }
+  .sbf-check{
+    width:36px;height:36px;
+    stroke:#e03616;
+    stroke-width:3;
+    fill:none;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .sbf-check path{
+    stroke-dasharray:30;
+    stroke-dashoffset:30;
+    animation:sbfDraw 0.5s ease-out 0.5s forwards;
+  }
+  @keyframes sbfPop{
+    0%{transform:scale(0);opacity:0}
+    100%{transform:scale(1);opacity:1}
+  }
+  @keyframes sbfDraw{to{stroke-dashoffset:0}}
+  @keyframes sbfRing{
+    0%{transform:scale(1);opacity:1}
+    100%{transform:scale(1.5);opacity:0}
+  }
+
+  .sbf-eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    color:#e03616;font-weight:500;margin-bottom:28px;
+  }
+  .sbf-eyebrow::before,.sbf-eyebrow::after{
+    content:'';width:32px;height:1px;background:#e03616;
+  }
+  .sbf-content h1{
+    font-size:clamp(48px,8vw,104px);
+    margin-bottom:32px;color:#000f32;
+  }
+  .sbf-content h1 .sbf-accent{color:#e03616;font-style:italic;font-weight:300}
+  .sbf-content p.sbf-lead{
+    font-family:'Fraunces',serif;
+    font-size:clamp(20px,2.2vw,26px);
+    color:rgba(0,15,50,0.75);
+    max-width:580px;
+    margin:0 auto 14px;
+    line-height:1.4;
+  }
+  .sbf-content p.sbf-sub{
+    font-size:16px;
+    color:rgba(0,15,50,0.6);
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* INFO ROW */
+  .sbf-info-row{
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    margin:60px 0;
+    flex-wrap:wrap;
+  }
+  .sbf-info-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .sbf-info-num{
+    font-family:'Fraunces',serif;
+    font-size:48px;
+    color:#e03616;
+    line-height:1;
+    margin-bottom:8px;
+    font-weight:400;
+  }
+  .sbf-info-label{
+    font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(0,15,50,0.62);font-weight:500;
+  }
+
+  /* CTAs */
+  .sbf-cta-group{
+    display:flex;
+    gap:16px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .sbf-btn-primary{
+    display:inline-block;
+    background:#e03616;color:#fbf8f3;
+    padding:18px 36px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.1em;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+    border:1px solid #e03616;
+  }
+  .sbf-btn-primary:hover{background:#000f32;border-color:#000f32;transform:translateY(-2px)}
+  .sbf-btn-secondary{
+    display:inline-block;
+    background:transparent;color:#000f32;
+    padding:18px 36px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.1em;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+    border:1px solid #000f32;
+  }
+  .sbf-btn-secondary:hover{background:#000f32;color:#fbf8f3;transform:translateY(-2px)}
+
+  /* FOOTER */
+  .sbf-footer{
+    background:#000000;color:rgba(245,241,234,0.5);
+    padding:40px 6vw;text-align:center;font-size:13px;
+    border-top:1px solid rgba(245,241,234,0.1);
+  }
+  .sbf-footer a{color:#e03616;text-decoration:none}
+
+  /* REVEAL */
+  .sbf-fade{opacity:0;animation:sbfFadeIn 0.8s ease-out forwards}
+  .sbf-fade-1{animation-delay:0.3s}
+  .sbf-fade-2{animation-delay:0.5s}
+  .sbf-fade-3{animation-delay:0.7s}
+  .sbf-fade-4{animation-delay:0.9s}
+  .sbf-fade-5{animation-delay:1.1s}
+  @keyframes sbfFadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .sbf-main{padding:50px 6vw}
+    .sbf-info-row{gap:30px;margin:40px 0}
+    .sbf-info-num{font-size:36px}
+    .sbf-check-wrap{width:72px;height:72px;margin-bottom:28px}
+    .sbf-check{width:30px;height:30px}
+    .sbf-cta-group{flex-direction:column;align-items:center}
+    .sbf-btn-primary,.sbf-btn-secondary{width:100%;max-width:300px;text-align:center}
+
+    .sbf-nav{grid-template-columns:1fr auto;padding:14px 6vw}
+    .sbf-logo{font-size:18px}
+    .sbf-nav-right .sbf-nav-cta{display:none}
+    .sbf-menu-toggle{display:flex}
+    .sbf-nav-center{
+      position:absolute;top:100%;left:0;right:0;
+      background:#fbf8f3;flex-direction:column;
+      align-items:stretch;gap:0;padding:0;
+      max-height:0;overflow:hidden;
+      transition:max-height 0.4s ease,padding 0.4s ease;
+      border-bottom:1px solid rgba(0,15,50,0.14);
+    }
+    .sbf-nav-center.sbf-open{max-height:400px;padding:20px 6vw 30px}
+    .sbf-nav-center .sbf-menu-link{
+      padding:16px 0;border-bottom:1px solid rgba(0,15,50,0.08);
+      text-align:center;font-size:14px;
+    }
+    .sbf-nav-center .sbf-menu-link:last-of-type{border-bottom:none}
+    .sbf-nav-center .sbf-menu-link::after{display:none}
+    .sbf-nav-center .sbf-nav-cta{
+      display:inline-block;margin-top:18px;padding:14px 28px;
+      align-self:center;text-align:center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="sbf-page">
+
+<nav class="sbf-nav">
+  <div class="sbf-nav-left">
+    <a href="/" class="sbf-logo">Sagebrush<span>·</span>on Fisher</a>
+  </div>
+  <div class="sbf-nav-center" id="sbfNavCenter">
+    <a href="/" class="sbf-menu-link">Home</a>
+    <a href="/about" class="sbf-menu-link">About</a>
+    <a href="/contact" class="sbf-menu-link">Contact</a>
+  </div>
+  <div class="sbf-nav-right">
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-nav-cta">Book Now</a>
+    <button class="sbf-menu-toggle" id="sbfMenuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="sbf-main">
+  <div class="sbf-content">
+
+    <div class="sbf-check-wrap">
+      <svg class="sbf-check" viewBox="0 0 24 24">
+        <path d="M5 12l5 5L20 7"/>
+      </svg>
+    </div>
+
+    <div class="sbf-fade sbf-fade-1">
+      <div class="sbf-eyebrow">Message Received</div>
+    </div>
+
+    <h1 class="sbf-display sbf-fade sbf-fade-2">Thank <span class="sbf-accent">you.</span></h1>
+
+    <p class="sbf-lead sbf-fade sbf-fade-3">Your message is on its way to us. We'll get back to you within one hour — that's a promise we've kept across 243 reviews.</p>
+
+    <p class="sbf-sub sbf-fade sbf-fade-3">In the meantime, please check your inbox (and spam folder, just in case) for a confirmation.</p>
+
+    <div class="sbf-info-row sbf-fade sbf-fade-4">
+      <div class="sbf-info-item">
+        <div class="sbf-info-num">1<span style="font-size:0.5em">hr</span></div>
+        <div class="sbf-info-label">Response Time</div>
+      </div>
+      <div class="sbf-info-item">
+        <div class="sbf-info-num">100<span style="font-size:0.5em">%</span></div>
+        <div class="sbf-info-label">Response Rate</div>
+      </div>
+      <div class="sbf-info-item">
+        <div class="sbf-info-num">5.0<span style="font-size:0.5em">★</span></div>
+        <div class="sbf-info-label">Guest Rating</div>
+      </div>
+    </div>
+
+    <div class="sbf-cta-group sbf-fade sbf-fade-5">
+      <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-btn-primary">Book Your Stay →</a>
+      <a href="/" class="sbf-btn-secondary">Back to Home</a>
+    </div>
+
+  </div>
+</main>
+
+<footer class="sbf-footer">
+  © 2026 Sagebrush on Fisher · Hosted by Jessica · <a href="https://book.sagebrushonfisher.com/" target="_blank">Book Direct</a>
+</footer>
+
+</div>
+
+<script>
+  (function(){
+    var toggle = document.getElementById('sbfMenuToggle');
+    var menu = document.getElementById('sbfNavCenter');
+    if(toggle && menu){
+      toggle.addEventListener('click', function(){
+        toggle.classList.toggle('sbf-open');
+        menu.classList.toggle('sbf-open');
+      });
+      menu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          toggle.classList.remove('sbf-open');
+          menu.classList.remove('sbf-open');
+        });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Sagebrush on Fisher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sbf-page,
+  .sbf-page *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+  .sbf-page{
+    font-family:'Inter',sans-serif !important;
+    background:#fbf8f3 !important;
+    color:#000f32 !important;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* Force all text to be visible - Convertri override protection */
+  .sbf-page h1,
+  .sbf-page h2,
+  .sbf-page h3,
+  .sbf-page p,
+  .sbf-page span,
+  .sbf-page div,
+  .sbf-page a,
+  .sbf-page button{
+    color:inherit;
+  }
+
+  .sbf-display{font-family:'Fraunces',serif !important;font-weight:400;letter-spacing:-0.02em;line-height:0.95}
+
+  /* NAV */
+  .sbf-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,248,243,0.95) !important;
+    border-bottom:1px solid rgba(0,15,50,0.14);
+    padding:18px 6vw;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+  }
+  .sbf-nav-left{display:flex;align-items:center}
+  .sbf-nav-center{display:flex;align-items:center;gap:40px}
+  .sbf-nav-right{display:flex;align-items:center;gap:16px}
+  .sbf-logo{
+    font-family:'Fraunces',serif !important;
+    font-size:22px;font-weight:500;
+    letter-spacing:-0.01em;
+    color:#000f32 !important;
+    text-decoration:none;
+  }
+  .sbf-logo span{color:#e03616 !important;font-style:italic}
+  .sbf-menu-link{
+    font-size:13px;font-weight:500;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:#000f32 !important;text-decoration:none;
+    position:relative;padding:6px 0;
+    transition:color 0.3s ease;
+  }
+  .sbf-menu-link::after{
+    content:'';position:absolute;left:0;bottom:0;
+    width:0;height:1px;background:#e03616;
+    transition:width 0.3s ease;
+  }
+  .sbf-menu-link:hover{color:#e03616 !important}
+  .sbf-menu-link:hover::after{width:100%}
+  .sbf-menu-link.sbf-active{color:#e03616 !important}
+  .sbf-menu-link.sbf-active::after{width:100%}
+  a.sbf-nav-cta{
+    background:#000f32 !important;
+    color:#fbf8f3 !important;
+    padding:11px 22px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.02em;
+    transition:all 0.3s ease;
+    border:1px solid #000f32;
+    display:inline-block;
+    white-space:nowrap;
+  }
+  a.sbf-nav-cta:hover{background:#e03616 !important;border-color:#e03616}
+
+  .sbf-menu-toggle{
+    display:none;background:none;border:none;cursor:pointer;
+    padding:8px;width:40px;height:40px;
+    flex-direction:column;justify-content:center;gap:5px;
+  }
+  .sbf-menu-toggle span{display:block;width:22px;height:2px;background:#000f32 !important;transition:all 0.3s ease}
+  .sbf-menu-toggle.sbf-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .sbf-menu-toggle.sbf-open span:nth-child(2){opacity:0}
+  .sbf-menu-toggle.sbf-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* HERO */
+  .sbf-hero{
+    padding:100px 6vw 60px;
+    text-align:center;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .sbf-eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    color:#e03616 !important;font-weight:500;margin-bottom:28px;
+  }
+  .sbf-eyebrow::before,.sbf-eyebrow::after{
+    content:'';width:32px;height:1px;background:#e03616;
+  }
+  .sbf-hero h1{
+    font-size:clamp(48px,8vw,110px);
+    margin-bottom:30px;
+    color:#000f32 !important;
+  }
+  .sbf-hero h1 .sbf-accent{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-hero p{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(18px,2vw,24px);
+    color:#3a4868 !important;
+    max-width:560px;
+    margin:0 auto;
+    line-height:1.4;
+  }
+
+  /* FORM AREA */
+  .sbf-form-area{
+    padding:40px 6vw 120px;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .sbf-form-placeholder{
+    background:#ffffff !important;
+    padding:60px 50px;
+    border:1px solid rgba(0,15,50,0.1);
+    border-radius:4px;
+    box-shadow:0 30px 60px -30px rgba(0,15,50,0.15);
+    text-align:center;
+  }
+  .sbf-form-label-section{
+    font-size:11px;letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:#e03616 !important;
+    font-weight:600;margin-bottom:16px;
+  }
+  .sbf-form-placeholder h2{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(28px,3vw,40px);
+    font-weight:400;line-height:1.1;
+    margin-bottom:20px;
+    color:#000f32 !important;
+  }
+  .sbf-form-placeholder h2 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-form-placeholder p{
+    font-size:16px;
+    color:#3a4868 !important;
+    max-width:480px;
+    margin:0 auto 32px;
+    line-height:1.5;
+  }
+
+  /* CLOSING NOTE */
+  .sbf-note{
+    background:#000f32 !important;
+    color:#f5f1ea !important;
+    padding:80px 6vw;
+    text-align:center;
+  }
+  .sbf-note-inner{max-width:700px;margin:0 auto}
+  .sbf-note h3{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(28px,3.5vw,40px);
+    font-weight:400;line-height:1.2;
+    margin-bottom:16px;
+    color:#f5f1ea !important;
+  }
+  .sbf-note h3 .sbf-italic-accent{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-note p{
+    font-size:16px;
+    color:#c8c4bd !important;
+    margin-bottom:32px;
+  }
+  .sbf-note-btn{
+    display:inline-block;
+    background:#e03616 !important;
+    color:#fbf8f3 !important;
+    padding:16px 32px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.1em;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+    border:1px solid #e03616;
+  }
+  .sbf-note-btn:hover{background:transparent !important;color:#e03616 !important}
+
+  /* FOOTER */
+  .sbf-footer{
+    background:#000000 !important;
+    color:#8a8782 !important;
+    padding:40px 6vw;
+    text-align:center;
+    font-size:13px;
+  }
+  .sbf-footer a{color:#e03616 !important;text-decoration:none}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .sbf-hero{padding:60px 6vw 40px}
+    .sbf-form-area{padding:30px 6vw 80px}
+    .sbf-form-placeholder{padding:40px 24px}
+    .sbf-note{padding:60px 6vw}
+
+    .sbf-nav{padding:14px 6vw}
+    .sbf-logo{font-size:18px}
+    .sbf-nav-right .sbf-nav-cta{display:none}
+    .sbf-menu-toggle{display:flex}
+    .sbf-nav-center{
+      display:none;
+      position:absolute;top:100%;left:0;right:0;
+      background:#fbf8f3 !important;
+      flex-direction:column;
+      padding:20px 6vw 30px;
+      border-bottom:1px solid rgba(0,15,50,0.14);
+      gap:0;
+    }
+    .sbf-nav-center.sbf-open{display:flex}
+    .sbf-nav-center .sbf-menu-link{
+      padding:16px 0;
+      border-bottom:1px solid rgba(0,15,50,0.08);
+      text-align:center;
+      font-size:14px;
+    }
+    .sbf-nav-center .sbf-menu-link:last-child{border-bottom:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="sbf-page">
+
+<nav class="sbf-nav">
+  <div class="sbf-nav-left">
+    <a href="/" class="sbf-logo" style="color:#000f32 !important;">Sagebrush<span style="color:#e03616 !important;">·</span>on Fisher</a>
+  </div>
+  <div class="sbf-nav-center" id="sbfNavCenter">
+    <a href="/" class="sbf-menu-link" style="color:#000f32 !important;">Home</a>
+    <a href="/about" class="sbf-menu-link" style="color:#000f32 !important;">About</a>
+    <a href="/contact" class="sbf-menu-link sbf-active" style="color:#e03616 !important;">Contact</a>
+  </div>
+  <div class="sbf-nav-right">
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-nav-cta" style="color:#fbf8f3 !important;background:#000f32 !important;">Book Now</a>
+    <button class="sbf-menu-toggle" id="sbfMenuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sbf-hero">
+  <div>
+    <div class="sbf-eyebrow" style="color:#e03616 !important;">Get In Touch</div>
+    <h1 class="sbf-display" style="color:#000f32 !important;">Let's <span class="sbf-accent" style="color:#e03616 !important;font-style:italic;">talk.</span></h1>
+    <p style="color:#3a4868 !important;font-family:'Fraunces',serif;">Have a question about your stay, the neighborhood, or extended bookings? We respond within an hour — every time.</p>
+  </div>
+</section>
+
+<!-- FORM AREA -->
+<section class="sbf-form-area">
+  <div class="sbf-form-placeholder">
+    <div class="sbf-form-label-section" style="color:#e03616 !important;">— Send a Message</div>
+    <h2 style="color:#000f32 !important;">Drop us a <span class="sbf-italic" style="color:#e03616 !important;font-style:italic;">line.</span></h2>
+    <p style="color:#3a4868 !important;">Click below to open our contact form. We'll respond within one hour.</p>
+
+    <!-- POPUP TRIGGER BUTTON -->
+    <a href="#box6c7aa7ae-4363-6771-5c19-1eec765c13d4"
+       onclick="sbfOpenPopup(event)"
+       style="display:inline-flex;align-items:center;gap:12px;background:#000f32 !important;color:#fbf8f3 !important;padding:20px 44px;border-radius:50px;border:1px solid #000f32;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;margin-top:20px;transition:all 0.3s ease;"
+       onmouseover="this.style.background='#e03616';this.style.borderColor='#e03616';this.style.transform='translateY(-2px)';"
+       onmouseout="this.style.background='#000f32';this.style.borderColor='#000f32';this.style.transform='translateY(0)';">
+      <span style="color:#fbf8f3 !important;">Open Contact Form</span>
+      <span style="color:#fbf8f3 !important;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.15);font-size:14px;">→</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- CLOSING NOTE -->
+<section class="sbf-note" style="background:#000f32 !important;">
+  <div class="sbf-note-inner">
+    <h3 style="color:#f5f1ea !important;">Ready to <span class="sbf-italic-accent" style="color:#e03616 !important;font-style:italic;">book?</span></h3>
+    <p style="color:#c8c4bd !important;">Skip the form — check availability and book your stay directly.</p>
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-note-btn" style="color:#fbf8f3 !important;background:#e03616 !important;">Book Your Stay →</a>
+  </div>
+</section>
+
+<footer class="sbf-footer" style="background:#000000 !important;color:#8a8782 !important;">
+  © 2026 Sagebrush on Fisher · Hosted by Jessica · <a href="https://book.sagebrushonfisher.com/" target="_blank" style="color:#e03616 !important;">Book Direct</a>
+</footer>
+
+</div>
+
+<script>
+  function sbfOpenPopup(e){
+    if(e) e.preventDefault();
+    var popupId = 'box6c7aa7ae-4363-6771-5c19-1eec765c13d4';
+    var popup = document.getElementById(popupId);
+    if(popup){
+      popup.style.display = 'block';
+      popup.style.visibility = 'visible';
+      popup.style.opacity = '1';
+      popup.classList.add('cv-visible','cv-open','active','open');
+      popup.classList.remove('cv-hidden','hidden');
+      popup.setAttribute('aria-hidden','false');
+      return false;
+    }
+    var parentLayer = document.querySelector('[data-layer-id="' + popupId + '"]');
+    if(parentLayer){
+      parentLayer.style.display = 'block';
+      parentLayer.classList.add('active','open','visible');
+      return false;
+    }
+    window.location.hash = popupId;
+    return false;
+  }
+
+  (function(){
+    var toggle = document.getElementById('sbfMenuToggle');
+    var menu = document.getElementById('sbfNavCenter');
+    if(toggle && menu){
+      toggle.addEventListener('click', function(){
+        toggle.classList.toggle('sbf-open');
+        menu.classList.toggle('sbf-open');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Townhome — Sagebrush on Fisher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sbf-page,.sbf-page *{margin:0;padding:0;box-sizing:border-box}
+  .sbf-page{
+    font-family:'Inter',sans-serif !important;
+    background:#fbf8f3 !important;
+    color:#000f32 !important;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .sbf-page a{color:inherit}
+
+  .sbf-display{font-family:'Fraunces',serif !important;font-weight:400;letter-spacing:-0.02em;line-height:0.95}
+
+  /* NAV */
+  .sbf-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,248,243,0.92) !important;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,15,50,0.14);
+    padding:18px 6vw;
+    display:flex;justify-content:space-between;align-items:center;gap:30px;
+  }
+  .sbf-nav-left{display:flex;align-items:center}
+  .sbf-nav-center{display:flex;align-items:center;gap:40px}
+  .sbf-nav-right{display:flex;align-items:center;gap:16px}
+  .sbf-logo{
+    font-family:'Fraunces',serif !important;
+    font-size:22px;font-weight:500;
+    letter-spacing:-0.01em;
+    color:#000f32 !important;text-decoration:none;
+  }
+  .sbf-logo span{color:#e03616 !important;font-style:italic}
+  .sbf-menu-link{
+    font-size:13px;font-weight:500;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:#000f32 !important;text-decoration:none;
+    position:relative;padding:6px 0;
+    transition:color 0.3s ease;
+  }
+  .sbf-menu-link::after{
+    content:'';position:absolute;left:0;bottom:0;
+    width:0;height:1px;background:#e03616;
+    transition:width 0.3s ease;
+  }
+  .sbf-menu-link:hover{color:#e03616 !important}
+  .sbf-menu-link:hover::after{width:100%}
+  a.sbf-nav-cta{
+    background:#000f32 !important;color:#fbf8f3 !important;
+    padding:11px 22px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.02em;
+    transition:all 0.3s ease;border:1px solid #000f32;
+    display:inline-block;white-space:nowrap;
+  }
+  a.sbf-nav-cta:hover{background:#e03616 !important;border-color:#e03616 !important;transform:translateY(-1px)}
+
+  .sbf-menu-toggle{
+    display:none;background:none;border:none;cursor:pointer;
+    padding:8px;width:40px;height:40px;
+    flex-direction:column;justify-content:center;gap:5px;
+  }
+  .sbf-menu-toggle span{display:block;width:22px;height:2px;background:#000f32;transition:all 0.3s ease}
+  .sbf-menu-toggle.sbf-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .sbf-menu-toggle.sbf-open span:nth-child(2){opacity:0}
+  .sbf-menu-toggle.sbf-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* PAGE HERO */
+  .sbf-page-hero{
+    padding:80px 6vw 40px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .sbf-breadcrumb{
+    display:inline-flex;gap:10px;align-items:center;
+    font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(0,15,50,0.55) !important;font-weight:500;
+    margin-bottom:32px;
+  }
+  .sbf-breadcrumb a{
+    color:rgba(0,15,50,0.55) !important;
+    text-decoration:none;
+    transition:color 0.3s ease;
+  }
+  .sbf-breadcrumb a:hover{color:#e03616 !important}
+  .sbf-breadcrumb-sep{color:rgba(0,15,50,0.3)}
+  .sbf-breadcrumb-current{color:#e03616 !important}
+  .sbf-page-hero h1{
+    font-size:clamp(48px,7vw,96px);
+    color:#000f32 !important;
+    margin-bottom:24px;
+    max-width:900px;
+  }
+  .sbf-page-hero h1 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-page-hero p{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(18px,2vw,22px);
+    color:#3a4868 !important;
+    max-width:640px;
+    line-height:1.5;
+  }
+
+  /* PHOTOS */
+  .sbf-photos{
+    padding:40px 6vw 80px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .sbf-photos-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .sbf-photo{
+    aspect-ratio:4/3;
+    background-size:cover;
+    background-position:center;
+    border-radius:4px;
+    transition:transform 0.6s ease;
+    box-shadow:0 20px 50px -20px rgba(0,15,50,0.25);
+  }
+  .sbf-photo:hover{transform:translateY(-4px)}
+
+  /* DETAILS */
+  .sbf-details{
+    padding:60px 6vw 100px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .sbf-details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:40px;
+  }
+  .sbf-detail-card{
+    padding:32px 0;
+    border-top:1px solid rgba(0,15,50,0.18);
+  }
+  .sbf-detail-num{
+    font-family:'Fraunces',serif !important;
+    font-size:13px;color:#e03616 !important;
+    letter-spacing:0.1em;margin-bottom:18px;
+  }
+  .sbf-detail-card h3{
+    font-family:'Fraunces',serif !important;
+    font-size:24px;font-weight:400;
+    color:#000f32 !important;
+    margin-bottom:12px;line-height:1.2;
+  }
+  .sbf-detail-card p{
+    font-size:15px;
+    color:rgba(0,15,50,0.65) !important;
+    line-height:1.6;
+  }
+
+  /* CTA */
+  .sbf-cta{
+    background:#000f32 !important;
+    color:#f5f1ea !important;
+    padding:90px 6vw;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .sbf-cta::before{
+    content:'';position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:120%;height:200%;
+    background:radial-gradient(ellipse,rgba(224,54,22,0.18) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .sbf-cta-inner{position:relative;z-index:1;max-width:780px;margin:0 auto}
+  .sbf-cta h2{
+    font-size:clamp(36px,5vw,60px);
+    color:#f5f1ea !important;margin-bottom:24px;
+  }
+  .sbf-cta h2 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-cta p{
+    font-size:17px;
+    color:rgba(245,241,234,0.7) !important;
+    max-width:520px;
+    margin:0 auto 36px;
+  }
+  .sbf-btn-primary{
+    display:inline-flex;align-items:center;gap:12px;
+    background:#e03616 !important;color:#fbf8f3 !important;
+    padding:20px 40px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    transition:all 0.3s ease;border:1px solid #e03616;
+  }
+  .sbf-btn-primary:hover{
+    background:transparent !important;color:#e03616 !important;
+    transform:translateY(-2px);
+  }
+
+  /* FOOTER */
+  .sbf-footer{
+    background:#000000 !important;color:#8a8782 !important;
+    padding:40px 6vw;text-align:center;font-size:13px;
+    border-top:1px solid rgba(245,241,234,0.1);
+  }
+  .sbf-footer a{color:#e03616 !important;text-decoration:none}
+
+  /* REVEAL */
+  .sbf-reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+  .sbf-reveal.sbf-visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .sbf-page-hero{padding:50px 6vw 30px}
+    .sbf-photos-grid{grid-template-columns:1fr;gap:14px}
+    .sbf-details-grid{grid-template-columns:1fr;gap:0}
+    .sbf-detail-card{padding:24px 0}
+    .sbf-cta{padding:70px 6vw}
+
+    .sbf-nav{padding:14px 6vw}
+    .sbf-logo{font-size:18px}
+    .sbf-nav-right .sbf-nav-cta{display:none}
+    .sbf-menu-toggle{display:flex}
+    .sbf-nav-center{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:#fbf8f3 !important;flex-direction:column;
+      padding:20px 6vw 30px;
+      border-bottom:1px solid rgba(0,15,50,0.14);gap:0;
+    }
+    .sbf-nav-center.sbf-open{display:flex}
+    .sbf-nav-center .sbf-menu-link{
+      padding:16px 0;
+      border-bottom:1px solid rgba(0,15,50,0.08);
+      text-align:center;font-size:14px;
+    }
+    .sbf-nav-center .sbf-menu-link:last-child{border-bottom:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="sbf-page">
+
+<nav class="sbf-nav">
+  <div class="sbf-nav-left">
+    <a href="/" class="sbf-logo">Sagebrush<span>·</span>on Fisher</a>
+  </div>
+  <div class="sbf-nav-center" id="sbfNavCenter">
+    <a href="/" class="sbf-menu-link">Home</a>
+    <a href="/about" class="sbf-menu-link">About</a>
+    <a href="/contact" class="sbf-menu-link">Contact</a>
+  </div>
+  <div class="sbf-nav-right">
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-nav-cta">Book Now</a>
+    <button class="sbf-menu-toggle" id="sbfMenuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="sbf-page-hero">
+  <div class="sbf-reveal">
+    <div class="sbf-breadcrumb">
+      <a href="/">Home</a>
+      <span class="sbf-breadcrumb-sep">/</span>
+      <span class="sbf-breadcrumb-current">The Townhome</span>
+    </div>
+    <h1 class="sbf-display">The <span class="sbf-italic">Townhome.</span></h1>
+    <p>Three stories of southwest boho meets art deco refinement. Built in 2018, designed for travelers who notice the details.</p>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="sbf-photos">
+  <div class="sbf-photos-grid">
+    <div class="sbf-photo sbf-reveal" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/townhome/townhome%20(1).jpg')"></div>
+    <div class="sbf-photo sbf-reveal" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/townhome/townhome%20(2).jpg')"></div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="sbf-details">
+  <div class="sbf-details-grid">
+    <div class="sbf-detail-card sbf-reveal">
+      <div class="sbf-detail-num">— 01</div>
+      <h3>Three Stories</h3>
+      <p>A freestanding townhome with thoughtfully laid out levels — living and kitchen on one floor, bedrooms on another, and a workspace/gym below.</p>
+    </div>
+    <div class="sbf-detail-card sbf-reveal">
+      <div class="sbf-detail-num">— 02</div>
+      <h3>Built in 2018</h3>
+      <p>Modern construction with quality materials and finishes. Everything works the way it should — no quirks, no surprises.</p>
+    </div>
+    <div class="sbf-detail-card sbf-reveal">
+      <div class="sbf-detail-num">— 03</div>
+      <h3>Designed With Intention</h3>
+      <p>Southwest boho meets art deco refinement. Every room considered, every detail chosen to make travelers feel at home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sbf-cta">
+  <div class="sbf-cta-inner sbf-reveal">
+    <h2 class="sbf-display">Ready to <span class="sbf-italic">stay?</span></h2>
+    <p>Check availability and book your stay directly.</p>
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-btn-primary">Book Your Stay →</a>
+  </div>
+</section>
+
+<footer class="sbf-footer">
+  © 2026 Sagebrush on Fisher · Hosted by Jessica · <a href="https://book.sagebrushonfisher.com/" target="_blank">Book Direct</a>
+</footer>
+
+</div>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.sbf-reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){el.classList.add('sbf-visible')});
+    } else {
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry,i){
+          if(entry.isIntersecting){
+            setTimeout(function(){entry.target.classList.add('sbf-visible')}, i*80);
+            obs.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+      els.forEach(function(el){obs.observe(el)});
+    }
+
+    var toggle = document.getElementById('sbfMenuToggle');
+    var menu = document.getElementById('sbfNavCenter');
+    if(toggle && menu){
+      toggle.addEventListener('click', function(){
+        toggle.classList.toggle('sbf-open');
+        menu.classList.toggle('sbf-open');
+      });
+      menu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          toggle.classList.remove('sbf-open');
+          menu.classList.remove('sbf-open');
+        });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
