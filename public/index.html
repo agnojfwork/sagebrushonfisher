@@ -1,1 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagebrush on Fisher — A Modern Houston Retreat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  .sbf-page,.sbf-page *{margin:0;padding:0;box-sizing:border-box}
+  .sbf-page{
+    font-family:'Inter',sans-serif !important;
+    background:#fbf8f3 !important;
+    color:#000f32 !important;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .sbf-page a{color:inherit}
 
+  .sbf-display{font-family:'Fraunces',serif !important;font-weight:400;letter-spacing:-0.02em;line-height:0.95}
+
+  /* NAV */
+  .sbf-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,248,243,0.92) !important;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(0,15,50,0.14);
+    padding:18px 6vw;
+    display:flex;justify-content:space-between;align-items:center;
+    gap:30px;
+  }
+  .sbf-nav-left{display:flex;align-items:center}
+  .sbf-nav-center{display:flex;align-items:center;gap:40px}
+  .sbf-nav-right{display:flex;align-items:center;gap:16px}
+  .sbf-logo{
+    font-family:'Fraunces',serif !important;
+    font-size:22px;font-weight:500;
+    letter-spacing:-0.01em;
+    color:#000f32 !important;text-decoration:none;
+  }
+  .sbf-logo span{color:#e03616 !important;font-style:italic}
+  .sbf-menu-link{
+    font-size:13px;font-weight:500;
+    letter-spacing:0.08em;text-transform:uppercase;
+    color:#000f32 !important;text-decoration:none;
+    position:relative;padding:6px 0;
+    transition:color 0.3s ease;
+  }
+  .sbf-menu-link::after{
+    content:'';position:absolute;left:0;bottom:0;
+    width:0;height:1px;background:#e03616;
+    transition:width 0.3s ease;
+  }
+  .sbf-menu-link:hover{color:#e03616 !important}
+  .sbf-menu-link:hover::after{width:100%}
+  .sbf-menu-link.sbf-active{color:#e03616 !important}
+  .sbf-menu-link.sbf-active::after{width:100%}
+  a.sbf-nav-cta{
+    background:#000f32 !important;color:#fbf8f3 !important;
+    padding:11px 22px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.02em;
+    transition:all 0.3s ease;border:1px solid #000f32;
+    display:inline-block;white-space:nowrap;
+  }
+  a.sbf-nav-cta:hover{background:#e03616 !important;border-color:#e03616 !important;transform:translateY(-1px)}
+
+  .sbf-menu-toggle{
+    display:none;background:none;border:none;cursor:pointer;
+    padding:8px;width:40px;height:40px;
+    flex-direction:column;justify-content:center;gap:5px;
+  }
+  .sbf-menu-toggle span{display:block;width:22px;height:2px;background:#000f32;transition:all 0.3s ease}
+  .sbf-menu-toggle.sbf-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .sbf-menu-toggle.sbf-open span:nth-child(2){opacity:0}
+  .sbf-menu-toggle.sbf-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* HERO */
+  .sbf-hero{
+    position:relative;
+    min-height:90vh;
+    padding:60px 6vw;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+  }
+  .sbf-hero-bg{
+    position:absolute;
+    inset:0;
+    background:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(1).jpg') center/cover;
+    z-index:0;
+  }
+  .sbf-hero-bg::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(0,15,50,0.85) 0%,rgba(0,15,50,0.65) 50%,rgba(0,15,50,0.35) 100%);
+  }
+  .sbf-hero-inner{
+    position:relative;z-index:1;
+    max-width:1400px;margin:0 auto;width:100%;
+  }
+  .sbf-hero-content{max-width:780px}
+  .sbf-hero-eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    color:#e03616 !important;font-weight:500;margin-bottom:32px;
+  }
+  .sbf-hero-eyebrow::before{content:'';width:32px;height:1px;background:#e03616}
+  .sbf-hero h1{
+    font-size:clamp(54px,9vw,140px);
+    color:#fbf8f3 !important;
+    margin-bottom:32px;
+  }
+  .sbf-hero h1 .sbf-accent{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-hero-lead{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(20px,2.2vw,26px);
+    color:rgba(251,248,243,0.85) !important;
+    max-width:560px;line-height:1.4;
+    margin-bottom:48px;font-weight:300;
+  }
+  .sbf-hero-actions{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .sbf-btn-primary{
+    display:inline-flex;align-items:center;gap:12px;
+    background:#e03616 !important;color:#fbf8f3 !important;
+    padding:20px 40px;border-radius:50px;
+    text-decoration:none;font-size:13px;
+    font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+    transition:all 0.3s ease;border:1px solid #e03616;
+  }
+  .sbf-btn-primary:hover{
+    background:transparent !important;color:#e03616 !important;
+    transform:translateY(-2px);
+  }
+  .sbf-btn-secondary{
+    display:inline-flex;align-items:center;gap:10px;
+    color:#fbf8f3 !important;text-decoration:none;
+    font-size:13px;font-weight:500;
+    letter-spacing:0.1em;text-transform:uppercase;
+    padding:18px 8px;
+    border-bottom:1px solid rgba(251,248,243,0.3);
+    transition:all 0.3s ease;
+  }
+  .sbf-btn-secondary:hover{color:#e03616 !important;border-bottom-color:#e03616}
+  .sbf-hero-meta{
+    position:absolute;
+    bottom:60px;right:6vw;
+    z-index:1;color:#fbf8f3;
+    text-align:right;font-size:11px;
+    letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;
+  }
+  .sbf-hero-meta span{display:block;margin-bottom:4px}
+  .sbf-hero-meta strong{font-family:'Fraunces',serif;font-size:16px;font-weight:400;letter-spacing:0;text-transform:none;color:#e03616 !important}
+
+  /* MARQUEE */
+  .sbf-marquee{
+    background:#000f32 !important;color:#f5f1ea !important;
+    padding:24px 0;overflow:hidden;
+  }
+  .sbf-marquee-track{
+    display:flex;gap:60px;white-space:nowrap;
+    animation:sbfScroll 35s linear infinite;
+    font-family:'Fraunces',serif !important;font-size:28px;
+    font-style:italic;font-weight:300;color:#f5f1ea !important;
+  }
+  .sbf-marquee-track span{display:flex;align-items:center;gap:60px;color:#f5f1ea !important}
+  .sbf-marquee-track span::after{content:'\2726';color:#e03616 !important;font-style:normal}
+  @keyframes sbfScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* INTRO */
+  .sbf-intro{
+    padding:140px 6vw;max-width:1200px;margin:0 auto;text-align:center;
+  }
+  .sbf-eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+    color:#e03616 !important;font-weight:500;margin-bottom:32px;
+  }
+  .sbf-eyebrow::before,.sbf-eyebrow::after{content:'';width:32px;height:1px;background:#e03616}
+  .sbf-intro h2{
+    font-size:clamp(40px,5.5vw,80px);
+    color:#000f32 !important;margin-bottom:40px;
+    max-width:900px;margin-left:auto;margin-right:auto;
+  }
+  .sbf-intro h2 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-intro p{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(18px,2vw,22px);
+    color:#3a4868 !important;
+    max-width:640px;margin:0 auto;line-height:1.5;
+  }
+
+  /* FEATURE GRID */
+  .sbf-features{
+    padding:0 6vw 140px;max-width:1400px;margin:0 auto;
+  }
+  .sbf-features-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:30px;
+  }
+  .sbf-feature-card{
+    position:relative;overflow:hidden;border-radius:4px;
+    aspect-ratio:4/5;cursor:pointer;
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    transition:transform 0.4s ease;
+  }
+  .sbf-feature-card:hover{transform:translateY(-4px)}
+  .sbf-feature-card.sbf-wide{
+    grid-column:span 2;aspect-ratio:21/9;
+  }
+  .sbf-feature-img{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    transition:transform 0.6s ease;
+  }
+  .sbf-feature-card:hover .sbf-feature-img{transform:scale(1.05)}
+  .sbf-feature-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(0,15,50,0.1) 0%,rgba(0,15,50,0.85) 100%);
+    transition:background 0.4s ease;
+  }
+  .sbf-feature-card:hover .sbf-feature-overlay{
+    background:linear-gradient(180deg,rgba(0,15,50,0.2) 0%,rgba(0,15,50,0.92) 100%);
+  }
+  .sbf-feature-content{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:40px;color:#fbf8f3;z-index:1;
+  }
+  .sbf-feature-num{
+    font-family:'Fraunces',serif !important;
+    font-size:14px;color:#e03616 !important;
+    letter-spacing:0.1em;margin-bottom:16px;display:block;
+  }
+  .sbf-feature-card h3{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(28px,3vw,40px);
+    font-weight:400;line-height:1.1;margin-bottom:14px;
+    color:#fbf8f3 !important;
+  }
+  .sbf-feature-card p{
+    font-size:15px;color:rgba(251,248,243,0.8) !important;
+    max-width:420px;line-height:1.5;
+    margin-bottom:18px;
+  }
+  .sbf-feature-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:#e03616 !important;
+    padding-bottom:6px;
+    border-bottom:1px solid rgba(224,54,22,0.4);
+    transition:all 0.3s ease;
+  }
+  .sbf-feature-card:hover .sbf-feature-link{
+    border-bottom-color:#e03616;
+    gap:14px;
+  }
+  .sbf-feature-link-arrow{
+    display:inline-block;
+    transition:transform 0.3s ease;
+    font-size:14px;
+  }
+  .sbf-feature-card:hover .sbf-feature-link-arrow{
+    transform:translateX(4px);
+  }
+
+  /* GALLERY */
+  .sbf-gallery{
+    padding:140px 6vw;max-width:1400px;margin:0 auto;
+  }
+  .sbf-gallery-head{
+    text-align:center;margin-bottom:60px;
+  }
+  .sbf-gallery-head h2{
+    font-size:clamp(40px,5vw,72px);
+    color:#000f32 !important;margin-bottom:20px;
+  }
+  .sbf-gallery-head h2 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-gallery-head p{
+    font-family:'Fraunces',serif !important;
+    font-size:18px;color:#3a4868 !important;
+    max-width:500px;margin:0 auto;
+  }
+  .sbf-gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:200px;
+    gap:12px;
+  }
+  .sbf-gallery-item{
+    position:relative;overflow:hidden;
+    background-size:cover;background-position:center;
+    transition:filter 0.4s ease;
+    cursor:pointer;border-radius:2px;
+  }
+  .sbf-gallery-item::before{
+    content:'';
+    position:absolute;inset:0;
+    background:rgba(0,15,50,0);
+    transition:background 0.3s ease;
+    z-index:1;
+  }
+  .sbf-gallery-item::after{
+    content:'+';
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%) scale(0.5);
+    width:48px;height:48px;
+    background:#e03616;color:#fbf8f3;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;font-weight:300;font-family:'Fraunces',serif;
+    opacity:0;transition:all 0.3s ease;
+    z-index:2;
+  }
+  .sbf-gallery-item:hover::before{background:rgba(0,15,50,0.35)}
+  .sbf-gallery-item:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .sbf-gallery-item.sbf-tall{grid-row:span 2}
+  .sbf-gallery-item.sbf-wide-2{grid-column:span 2}
+  .sbf-gallery-item.sbf-big{grid-column:span 2;grid-row:span 2}
+
+  /* LIGHTBOX */
+  .sbf-lightbox{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,0.95);
+    z-index:1000;
+    display:none;
+    align-items:center;justify-content:center;
+    padding:60px 80px;
+    opacity:0;
+    transition:opacity 0.3s ease;
+  }
+  .sbf-lightbox.sbf-open{display:flex;opacity:1}
+  .sbf-lightbox-img-wrap{
+    position:relative;max-width:100%;max-height:100%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .sbf-lightbox-img{
+    max-width:100%;max-height:80vh;
+    width:auto;height:auto;
+    object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5);
+    border-radius:4px;
+    opacity:0;
+    transition:opacity 0.4s ease;
+  }
+  .sbf-lightbox-img.sbf-loaded{opacity:1}
+  .sbf-lightbox-close{
+    position:absolute;top:24px;right:24px;
+    width:48px;height:48px;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:50%;
+    color:#fbf8f3;font-size:20px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.3s ease;z-index:10;
+  }
+  .sbf-lightbox-close:hover{
+    background:#e03616;border-color:#e03616;
+    transform:rotate(90deg);
+  }
+  .sbf-lightbox-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:56px;height:56px;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:50%;
+    color:#fbf8f3;font-size:24px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all 0.3s ease;z-index:10;
+    font-family:'Fraunces',serif;
+  }
+  .sbf-lightbox-nav:hover{
+    background:#e03616;border-color:#e03616;
+    transform:translateY(-50%) scale(1.1);
+  }
+  .sbf-lightbox-prev{left:24px}
+  .sbf-lightbox-next{right:24px}
+  .sbf-lightbox-counter{
+    position:absolute;bottom:24px;left:50%;
+    transform:translateX(-50%);
+    color:rgba(251,248,243,0.7);
+    font-size:13px;letter-spacing:0.2em;
+    font-weight:500;z-index:10;
+  }
+  .sbf-lightbox-counter strong{
+    color:#e03616;
+    font-family:'Fraunces',serif;
+    font-size:16px;font-weight:400;
+    margin-right:4px;
+  }
+  body.sbf-noscroll{overflow:hidden}
+
+  /* STATS */
+  .sbf-stats{
+    background:#000f32 !important;color:#fbf8f3 !important;
+    padding:80px 6vw;position:relative;overflow:hidden;
+  }
+  .sbf-stats::before{
+    content:'';position:absolute;
+    top:-200px;right:-200px;width:500px;height:500px;border-radius:50%;
+    background:radial-gradient(circle,#e03616 0%,transparent 70%);
+    opacity:0.18;pointer-events:none;
+  }
+  .sbf-stats-inner{
+    max-width:1400px;margin:0 auto;position:relative;z-index:1;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:40px;align-items:center;
+  }
+  .sbf-stat{text-align:center}
+  .sbf-stat-num{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(52px,6vw,84px);
+    color:#e03616 !important;
+    line-height:1;margin-bottom:14px;font-weight:400;
+  }
+  .sbf-stat-label{
+    font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(251,248,243,0.7) !important;font-weight:500;
+  }
+
+  /* TESTIMONIAL */
+  .sbf-testimonial{
+    padding:140px 6vw;max-width:1100px;margin:0 auto;
+    text-align:center;position:relative;
+  }
+  .sbf-quote-mark{
+    font-family:'Fraunces',serif !important;
+    font-size:140px;color:#e03616 !important;
+    line-height:1;margin-bottom:-40px;opacity:0.4;
+  }
+  .sbf-testimonial blockquote{
+    font-family:'Fraunces',serif !important;
+    font-size:clamp(24px,3.5vw,42px);
+    font-weight:300;font-style:italic;
+    line-height:1.3;color:#000f32 !important;
+    margin-bottom:40px;
+  }
+  .sbf-testimonial-author{
+    display:inline-flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .sbf-author-line{width:40px;height:1px;background:#e03616;margin-bottom:8px}
+  .sbf-author-name{
+    font-family:'Fraunces',serif !important;
+    font-size:18px;color:#000f32 !important;font-style:italic;
+  }
+  .sbf-author-role{
+    font-size:11px;letter-spac:0.2em;text-transform:uppercase;
+    color:#3a4868 !important;
+  }
+
+  /* FINAL CTA */
+  .sbf-final-cta{
+    background:#000000 !important;color:#f5f1ea !important;
+    padding:140px 6vw;text-align:center;position:relative;overflow:hidden;
+  }
+  .sbf-final-cta::before{
+    content:'';position:absolute;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    width:120%;height:200%;
+    background:radial-gradient(ellipse,rgba(224,54,22,0.18) 0%,transparent 50%);
+    pointer-events:none;
+  }
+  .sbf-cta-inner{position:relative;z-index:1;max-width:900px;margin:0 auto}
+  .sbf-final-cta h2{
+    font-size:clamp(48px,7vw,100px);
+    color:#f5f1ea !important;margin-bottom:30px;
+  }
+  .sbf-final-cta h2 .sbf-italic{color:#e03616 !important;font-style:italic;font-weight:300}
+  .sbf-final-cta p{
+    font-size:18px;color:rgba(245,241,234,0.7) !important;
+    max-width:560px;margin:0 auto 48px;
+  }
+
+  /* FOOTER */
+  .sbf-footer{
+    background:#000000 !important;color:#8a8782 !important;
+    padding:40px 6vw;text-align:center;font-size:13px;
+    border-top:1px solid rgba(245,241,234,0.1);
+  }
+  .sbf-footer a{color:#e03616 !important;text-decoration:none}
+
+  /* REVEAL */
+  .sbf-reveal{opacity:0;transform:translateY(40px);transition:opacity 1s ease,transform 1s ease}
+  .sbf-reveal.sbf-visible{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media (max-width:900px){
+    .sbf-hero{min-height:auto;padding:80px 6vw}
+    .sbf-hero-meta{position:static;text-align:left;margin-top:40px}
+    .sbf-features-grid{grid-template-columns:1fr;gap:20px}
+    .sbf-feature-card.sbf-wide{grid-column:auto;aspect-ratio:4/5}
+    .sbf-feature-content{padding:28px}
+    .sbf-stats-inner{grid-template-columns:repeat(2,1fr);gap:30px}
+    .sbf-intro,.sbf-testimonial,.sbf-final-cta,.sbf-gallery{padding-top:80px;padding-bottom:80px}
+    .sbf-features{padding-bottom:80px}
+    .sbf-hero-actions{flex-direction:column;align-items:stretch;width:100%;max-width:320px}
+    .sbf-btn-primary,.sbf-btn-secondary{justify-content:center;text-align:center}
+    .sbf-marquee-track{font-size:22px}
+    .sbf-gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+    .sbf-gallery-item.sbf-big{grid-column:span 2;grid-row:span 2}
+    .sbf-gallery-item.sbf-wide-2{grid-column:span 2;grid-row:span 1}
+
+    .sbf-lightbox{padding:60px 16px}
+    .sbf-lightbox-nav{width:44px;height:44px;font-size:20px}
+    .sbf-lightbox-prev{left:8px}
+    .sbf-lightbox-next{right:8px}
+    .sbf-lightbox-close{top:12px;right:12px;width:40px;height:40px}
+
+    .sbf-nav{padding:14px 6vw}
+    .sbf-logo{font-size:18px}
+    .sbf-nav-right .sbf-nav-cta{display:none}
+    .sbf-menu-toggle{display:flex}
+    .sbf-nav-center{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:#fbf8f3 !important;flex-direction:column;
+      padding:20px 6vw 30px;
+      border-bottom:1px solid rgba(0,15,50,0.14);gap:0;
+    }
+    .sbf-nav-center.sbf-open{display:flex}
+    .sbf-nav-center .sbf-menu-link{
+      padding:16px 0;
+      border-bottom:1px solid rgba(0,15,50,0.08);
+      text-align:center;font-size:14px;
+    }
+    .sbf-nav-center .sbf-menu-link:last-child{border-bottom:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="sbf-page">
+
+<nav class="sbf-nav">
+  <div class="sbf-nav-left">
+    <a href="/" class="sbf-logo">Sagebrush<span>·</span>on Fisher</a>
+  </div>
+  <div class="sbf-nav-center" id="sbfNavCenter">
+    <a href="/" class="sbf-menu-link sbf-active">Home</a>
+    <a href="/about" class="sbf-menu-link">About</a>
+    <a href="/contact" class="sbf-menu-link">Contact</a>
+  </div>
+  <div class="sbf-nav-right">
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-nav-cta">Book Now</a>
+    <button class="sbf-menu-toggle" id="sbfMenuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="sbf-hero">
+  <div class="sbf-hero-bg"></div>
+  <div class="sbf-hero-inner">
+    <div class="sbf-hero-content">
+      <div class="sbf-hero-eyebrow">A Houston Retreat</div>
+      <h1 class="sbf-display">Stay where <span class="sbf-accent">Houston</span> feels like home.</h1>
+      <p class="sbf-hero-lead">A modern three-story townhome in Garden Oaks, designed for the way travelers actually live. Walk to breweries. Cook a full meal. Work a full day. Sleep like you mean it.</p>
+      <div class="sbf-hero-actions">
+        <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-btn-primary">Book Your Stay →</a>
+        <a href="/about" class="sbf-btn-secondary">Explore the home</a>
+      </div>
+    </div>
+  </div>
+  <div class="sbf-hero-meta">
+    <span>★ 5.0 · 43 Reviews</span>
+    <strong>Superhost</strong>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="sbf-marquee">
+  <div class="sbf-marquee-track">
+    <span>World Cup 2026 Ready</span>
+    <span>Sleeps Six in Comfort</span>
+    <span>Walkable Heights Neighborhood</span>
+    <span>Self Check-In</span>
+    <span>At-Home Gym</span>
+    <span>Chef's Kitchen</span>
+    <span>World Cup 2026 Ready</span>
+    <span>Sleeps Six in Comfort</span>
+    <span>Walkable Heights Neighborhood</span>
+    <span>Self Check-In</span>
+    <span>At-Home Gym</span>
+    <span>Chef's Kitchen</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="sbf-intro">
+  <div class="sbf-reveal">
+    <div class="sbf-eyebrow">The Property</div>
+    <h2 class="sbf-display">Built with intention. <span class="sbf-italic">Designed for stays that matter.</span></h2>
+    <p>Three bedrooms, three baths, three stories — and not a single corner left unconsidered. Whether you're here for a weekend, a working week, or the entire World Cup, Sagebrush on Fisher is ready for the way you want to live.</p>
+  </div>
+</section>
+
+<!-- FEATURE GRID -->
+<section class="sbf-features">
+  <div class="sbf-features-grid">
+
+    <a href="/the-townhome" class="sbf-feature-card sbf-reveal">
+      <div class="sbf-feature-img" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/townhome/townhome%20(1).jpg')"></div>
+      <div class="sbf-feature-overlay"></div>
+      <div class="sbf-feature-content">
+        <span class="sbf-feature-num">— 01</span>
+        <h3>The Townhome</h3>
+        <p>Three stories of southwest boho meets art deco refinement. Built in 2018 with travelers in mind.</p>
+        <span class="sbf-feature-link">Learn more <span class="sbf-feature-link-arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="/chef-kitchen" class="sbf-feature-card sbf-reveal">
+      <div class="sbf-feature-img" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/kitchen/kitchen.jpg')"></div>
+      <div class="sbf-feature-overlay"></div>
+      <div class="sbf-feature-content">
+        <span class="sbf-feature-num">— 02</span>
+        <h3>Chef's Kitchen</h3>
+        <p>Pots, pans, immersion blender, zester. Pourover, Chemex, Keurig. Cook anything. Caffeinate everything.</p>
+        <span class="sbf-feature-link">Learn more <span class="sbf-feature-link-arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="/sleep-work-train" class="sbf-feature-card sbf-wide sbf-reveal">
+      <div class="sbf-feature-img" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/sleep-work-train/swt.jpg')"></div>
+      <div class="sbf-feature-overlay"></div>
+      <div class="sbf-feature-content">
+        <span class="sbf-feature-num">— 03</span>
+        <h3>Sleep, Work, Train.</h3>
+        <p>Two king bedrooms with hybrid plush mattresses. A dual-monitor workstation with Herman Miller seating. A garage gym with squat rack, free weights, and pull-up bar. Whatever your routine — keep it.</p>
+        <span class="sbf-feature-link">Learn more <span class="sbf-feature-link-arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="/outdoor-patio" class="sbf-feature-card sbf-reveal">
+      <div class="sbf-feature-img" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/outdoor-patio/outdoor.jpg')"></div>
+      <div class="sbf-feature-overlay"></div>
+      <div class="sbf-feature-content">
+        <span class="sbf-feature-num">— 04</span>
+        <h3>Outdoor Patio</h3>
+        <p>Fire pit, twinkle lights, plants everywhere. The patio that passes the vibe check.</p>
+        <span class="sbf-feature-link">Learn more <span class="sbf-feature-link-arrow">→</span></span>
+      </div>
+    </a>
+
+    <a href="/living-space" class="sbf-feature-card sbf-reveal">
+      <div class="sbf-feature-img" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/livingroom-img/living-room.jpg')"></div>
+      <div class="sbf-feature-overlay"></div>
+      <div class="sbf-feature-content">
+        <span class="sbf-feature-num">— 05</span>
+        <h3>The Living Space</h3>
+        <p>Open-plan living designed to gather, lounge, or work in. The kind of space that disappears around you.</p>
+        <span class="sbf-feature-link">Learn more <span class="sbf-feature-link-arrow">→</span></span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sbf-gallery">
+  <div class="sbf-gallery-head sbf-reveal">
+    <div class="sbf-eyebrow">A Closer Look</div>
+    <h2 class="sbf-display">The <span class="sbf-italic">tour.</span></h2>
+    <p>A glimpse inside every room. Click any image to view full size.</p>
+  </div>
+
+  <div class="sbf-gallery-grid" id="sbfGalleryGrid">
+    <div class="sbf-gallery-item sbf-big sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(3).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(3).jpg')"></div>
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(5).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(5).jpg')"></div>
+    <div class="sbf-gallery-item sbf-tall sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(8).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(8).jpg')"></div>
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(11).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(11).jpg')"></div>
+
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(13).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(13).jpg')"></div>
+    <div class="sbf-gallery-item sbf-wide-2 sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(15).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(15).jpg')"></div>
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(17).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(17).jpg')"></div>
+
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(19).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(19).jpg')"></div>
+    <div class="sbf-gallery-item sbf-tall sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(20).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(20).jpg')"></div>
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(21).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(21).jpg')"></div>
+    <div class="sbf-gallery-item sbf-reveal" data-img="https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(23).jpg" style="background-image:url('https://www.coloradorockymountainretreats.com/sagebrushonfisher-imgs/img1%20(23).jpg')"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="sbf-lightbox" id="sbfLightbox" role="dialog" aria-modal="true" aria-label="Image gallery">
+  <button class="sbf-lightbox-close" id="sbfLightboxClose" aria-label="Close gallery">✕</button>
+  <button class="sbf-lightbox-nav sbf-lightbox-prev" id="sbfLightboxPrev" aria-label="Previous image">‹</button>
+  <button class="sbf-lightbox-nav sbf-lightbox-next" id="sbfLightboxNext" aria-label="Next image">›</button>
+  <div class="sbf-lightbox-img-wrap">
+    <img class="sbf-lightbox-img" id="sbfLightboxImg" alt="Gallery image">
+  </div>
+  <div class="sbf-lightbox-counter">
+    <strong id="sbfLightboxCurrent">1</strong> / <span id="sbfLightboxTotal">11</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="sbf-stats">
+  <div class="sbf-stats-inner">
+    <div class="sbf-stat sbf-reveal">
+      <div class="sbf-stat-num">5.0<span style="font-size:0.4em">★</span></div>
+      <div class="sbf-stat-label">Guest Rating</div>
+    </div>
+    <div class="sbf-stat sbf-reveal">
+      <div class="sbf-stat-num">243</div>
+      <div class="sbf-stat-label">Total Reviews</div>
+    </div>
+    <div class="sbf-stat sbf-reveal">
+      <div class="sbf-stat-num">10<span style="font-size:0.4em">yrs</span></div>
+      <div class="sbf-stat-label">Hosting Experience</div>
+    </div>
+    <div class="sbf-stat sbf-reveal">
+      <div class="sbf-stat-num">1<span style="font-size:0.4em">hr</span></div>
+      <div class="sbf-stat-label">Response Time</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="sbf-testimonial">
+  <div class="sbf-reveal">
+    <div class="sbf-quote-mark">"</div>
+    <blockquote>The attention to detail at Sagebrush is unmatched. From the keypad entry to the workstation setup, every part of the stay felt thought-through. We didn't want to leave.</blockquote>
+    <div class="sbf-testimonial-author">
+      <div class="sbf-author-line"></div>
+      <span class="sbf-author-name">— A Recent Guest</span>
+      <span class="sbf-author-role">Houston, Texas</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="sbf-final-cta">
+  <div class="sbf-cta-inner sbf-reveal">
+    <h2 class="sbf-display">Your stay <span class="sbf-italic">awaits.</span></h2>
+    <p>Whether it's the World Cup, a long weekend, or a working escape — check availability and book directly.</p>
+    <a href="https://book.sagebrushonfisher.com/" target="_blank" class="sbf-btn-primary">Check Availability →</a>
+  </div>
+</section>
+
+<footer class="sbf-footer">
+  © 2026 Sagebrush on Fisher · Hosted by Jessica · <a href="https://book.sagebrushonfisher.com/" target="_blank">Book Direct</a>
+</footer>
+
+</div>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.sbf-reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){el.classList.add('sbf-visible')});
+    } else {
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry,i){
+          if(entry.isIntersecting){
+            setTimeout(function(){entry.target.classList.add('sbf-visible')}, i*60);
+            obs.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+      els.forEach(function(el){obs.observe(el)});
+    }
+
+    var toggle = document.getElementById('sbfMenuToggle');
+    var menu = document.getElementById('sbfNavCenter');
+    if(toggle && menu){
+      toggle.addEventListener('click', function(){
+        toggle.classList.toggle('sbf-open');
+        menu.classList.toggle('sbf-open');
+      });
+      menu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          toggle.classList.remove('sbf-open');
+          menu.classList.remove('sbf-open');
+        });
+      });
+    }
+
+    // LIGHTBOX
+    var galleryItems = document.querySelectorAll('#sbfGalleryGrid .sbf-gallery-item');
+    var lightbox = document.getElementById('sbfLightbox');
+    var lightboxImg = document.getElementById('sbfLightboxImg');
+    var lightboxClose = document.getElementById('sbfLightboxClose');
+    var lightboxPrev = document.getElementById('sbfLightboxPrev');
+    var lightboxNext = document.getElementById('sbfLightboxNext');
+    var lightboxCurrent = document.getElementById('sbfLightboxCurrent');
+    var lightboxTotal = document.getElementById('sbfLightboxTotal');
+    var currentIdx = 0;
+
+    if(galleryItems.length && lightbox){
+      var imgUrls = [];
+      galleryItems.forEach(function(item, i){
+        imgUrls.push(item.getAttribute('data-img'));
+        item.addEventListener('click', function(){ openLightbox(i); });
+      });
+      lightboxTotal.textContent = imgUrls.length;
+
+      function preload(idx){
+        var i = (idx + imgUrls.length) % imgUrls.length;
+        var img = new Image();
+        img.src = imgUrls[i];
+      }
+
+      function showImage(idx){
+        currentIdx = (idx + imgUrls.length) % imgUrls.length;
+        lightboxImg.classList.remove('sbf-loaded');
+        var img = new Image();
+        img.onload = function(){
+          lightboxImg.src = imgUrls[currentIdx];
+          lightboxImg.classList.add('sbf-loaded');
+        };
+        img.src = imgUrls[currentIdx];
+        lightboxCurrent.textContent = currentIdx + 1;
+        preload(currentIdx + 1);
+        preload(currentIdx - 1);
+      }
+
+      function openLightbox(idx){
+        showImage(idx);
+        lightbox.classList.add('sbf-open');
+        document.body.classList.add('sbf-noscroll');
+      }
+
+      function closeLightbox(){
+        lightbox.classList.remove('sbf-open');
+        document.body.classList.remove('sbf-noscroll');
+        lightboxImg.classList.remove('sbf-loaded');
+      }
+
+      function nextImg(){ showImage(currentIdx + 1); }
+      function prevImg(){ showImage(currentIdx - 1); }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxNext.addEventListener('click', nextImg);
+      lightboxPrev.addEventListener('click', prevImg);
+
+      lightbox.addEventListener('click', function(e){
+        if(e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function(e){
+        if(!lightbox.classList.contains('sbf-open')) return;
+        if(e.key === 'Escape') closeLightbox();
+        else if(e.key === 'ArrowRight') nextImg();
+        else if(e.key === 'ArrowLeft') prevImg();
+      });
+
+      // Swipe support for mobile
+      var touchStartX = 0;
+      lightbox.addEventListener('touchstart', function(e){
+        touchStartX = e.changedTouches[0].screenX;
+      }, {passive:true});
+      lightbox.addEventListener('touchend', function(e){
+        var diff = e.changedTouches[0].screenX - touchStartX;
+        if(Math.abs(diff) > 50){
+          if(diff < 0) nextImg();
+          else prevImg();
+        }
+      }, {passive:true});
+    }
+  })();
+</script>
+
+</body>
+</html>
